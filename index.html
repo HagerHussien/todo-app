@@ -7,7 +7,9 @@
 
     </head>
     <body>
+
         <div class="top-border"></div>
+       
 
         <div class="container-fluid padding-top-bottom-sm">
             
@@ -26,11 +28,12 @@
             </div>
             
         </div> 
+         <div class="loginpage">
         <div class="container-fluid padding-top-bottom-sm">
             <div class="row">
              <div class="col-md-offset-4 col-md-5">
                 
-                <form class="form-horizontal" action="" >
+                <form class="form-horizontal" action="" id="form">
                   
                   <div class="form-group">
                       <input type="name" class="form-control" name="username" id="name" placeholder="Username">
@@ -49,16 +52,79 @@
               </div>
             </div>
         </div>
+        <div class="slidedown" >   
+        <div class=" col-md-4 col-md-offset-4 alert alert-danger alert-dismissable">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
+            <strong> <center>ERROR!</center></strong> <hr> Invalid USER !! </div>
+
+       </div>
         
+        </div>
+        <div class="pagetodo">
+
+           <div class="container-fluid padding-top-bottom-sm">
+            <div class="row">
+             <div class="col-md-offset-2 col-md-4">
+              <div id="notcomplete" ondragover="dragover(event)" ondrop="drop(event)"> 
+                <div class="alert alert-warning">
+                  <strong>Hurry up!</strong> You have to complete all these todo items.
+                </div>
+
+              </div>
+                  <button class="btn btn-primary additem"><span>+</span> Add Item </button>
+               
+             
+            </div>
+              <div class="col-md-4">
+                <div id="complete" ondragover="dragover(event)" ondrop="drop(event)">
+                 <div class="alert alert-success">
+                  <strong>Well done!</strong> You successfully completed all these todo items.
+                  </div>
+              </div>
+             </div>
+             </div>
+             </div>
+
+
+          <div  class="form-add-item" >
+
+          <form class="form-horizontal add-form" id="form-add">
+
+           <div class="salert-dismissable">
+           
+            <strong>Add New todo item</strong>
+             <a href="#" class="close-add" data-dismiss="alert" aria-label="close"> X </a>
+            </div>
+            <hr>
+           <div class="form-group">
+            <input type="text" placeholder="Title" name="title">
+          </div>
+           <div class="form-group">
+            <input type="text" placeholder="Description" name="desc">
+            </div>
+             <div class="form-group">
+            <p>Status</p>
+            <input type="radio" name="complete" value="true"> <label >Completed</label>
+              <input type="radio" name="complete" value="false" ><label >Not Completed</label>
+            </div>
+            <hr>
+             <div class="form-group">
+            <button  class="btn btn-primary add submit">Add Item</button>
+             </div>
+          </form>
+          </div>
+       </div>
+
+
+
         <div class="bottom-border"></div>
             
            
 
-            <div style="clear:both;"></div>
-	        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-            <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="node_modules/jquery/dist/jquery.slim.min.js"></script> 
-            <script type="text/javascript" src="js/todo.js"></script>
+        
+	  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/todo.js"></script>
         
     </body>
 </html>

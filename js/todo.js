@@ -1,13 +1,100 @@
 var db = openDatabase('todoDB', '1.0', 'todo app database', 1 * 1024 * 1024);
+var dolist ={
+    'createTable':function(){
+            db.transaction(function (tx){
+            tx.executeSql("CREATE TABLE IF NOT EXISTS toDo (id , title , desc , complete)");
+            });
+    },
+    'insertRow':function(doo){
+      console.log(doo);
+            db.transaction(function (tx) {
+                  tx.executeSql('INSERT INTO toDo  VALUES (?,?,?,?)',
+                  [doo.id,doo.title,doo.desc,doo.complete]);
+            });
+    },
+    'deleteRow':function(doo){
+            db.transaction(function (tx) {
+                  tx.executeSql('DELETE FROM toDo WHERE title =? ',
+                  [doo]);
+            });
+    },
+    'updateRow':function(status,title){
+            db.transaction(function (tx) {
+                  tx.executeSql('UPDATE toDo SET complete =? WHERE title =? ',
+                  [status,title]);
+            });
+    },
+    'getAllList':function(){
+            return new Promise(function(resolve,reject){
+                db.transaction(function (tx) {
+                      tx.executeSql('SELECT * FROM toDo',[],function(tx,res){
+                        if(res.rows){
+                            if(!res.rows.length){
+                                resolve({status:'error', messege:'there is no things'})
+                            }else{
+                                resolve({status:'success',data:res.rows})
+                            }
+                        }else{
+                            reject({status:'error', messege:'error is occured'})
+                        }
+                      });
 
+                });
+            });
+    },
+    'getList':function(title){
+            return new Promise(function(resolve,reject){
+                db.transaction(function (tx) {
+                      tx.executeSql('SELECT complete FROM toDo where title='+title,[],function(tx,res){
+                        if(res.rows){
+                            if(!res.rows.length){
+                                resolve({status:'error', messege:'there is no things'})
+                            }else{
+                                resolve({status:'success',data:res.rows})
+                            }
+                        }else{
+                            reject({status:'error', messege:'error is occured'})
+                        }
+                      });
+
+                });
+            });
+    },
+    'rendureList':function(doo){
+
+      for (var i = 0; i<doo.length ;i++)
+      {
+          if(doo[i].complete == "true"){
+              $( "#complete" ).append("<div ondragstart='dragstart(event)' draggable='true' class='alert alert-success'  id='1'>\
+                <p style='color:#505050;font-size:30px;'>"+doo[i].title+"</p>\
+                <p>"+doo[i].desc+"</p>\
+                <button class='delete btn btn-danger'>Delete</button>\
+                <button class='update btn btn-success' >Update</button>\
+                </div>"
+              );
+                  
+          } else if (doo[i].complete == "false") {
+             $( "#notcomplete" ).append("<div ondragstart='dragstart(event)' draggable='true' class='alert alert-warning' id='1'>\
+                <p style='color:#505050;font-size:30px;'>"+doo[i].title+"</p>\
+                <p>"+doo[i].desc+"</p>\
+                <button class='delete btn btn-danger'>Delete</button>\
+                <button class='update btn btn-warning' >Update</button>\
+                </div>"
+              );
+            }   
+
+
+      }
+    }
+}
 
 var user=
 {    
-    createTable:function()
+    createTableUser:function()
     {
         db.transaction(function (tx) {  
 
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Users (id integer primary key, username , password)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Users (uid integer primary key, username , password)');
        });
     },
    
@@ -16,7 +103,7 @@ var user=
        db.transaction(function (tx) {  
 
 
-         tx.executeSql('INSERT INTO Users VALUES(?,?,?) ',[user.id,user.username,user.password]);
+         tx.executeSql('INSERT INTO Users VALUES(?,?,?) ',[user.uid,user.username,user.password]);
         });
        
    },
@@ -26,49 +113,177 @@ var user=
     {
     
     return new Promise(function(resolve,reject)
-    {          
+    {        
+
      db.transaction(function(tx){
-     tx.executeSql("SELECT * FROM Users WHERE username=?", [user.username] ,function(tx,res){
+     tx.executeSql("SELECT uid FROM Users WHERE username=? and password=?", [user.username , user.password] ,function(tx,res){
       if(res){
 
             if(!res.rows.length)
             {
 
-              reject({status:"error",message:"data not retrive"})
+             // reject({status:"error",message:"data not retrive"})
+              $(document).ready(function(){
+             
+                $(".slidedown").slideDown();
+               
+
+               $('.close').click(function(){
+                      $(".slidedown").slideUp();
+                  });
+
+             });
+               
+
+
             }
             else
             {
-                if(res[0]== user.password)
-                    var_dump(res[0]);
-                    console.log(user.password);
-            location.href="todo.html";
-              resolve({status:"sucess", data:res.rows ,message:"good data"});
+              //console.log(res.rows);
 
-             //console.log(res.rows);
+            for (var i=0;i<res.rows.length;i++){
+                var user_id=res.rows[i].uid
+
+              }
+
+                $(document).ready(function(){
+             
+                $(".loginpage").hide("slow");
+
+               $(".pagetodo").show("slow");
+
+
+                 $('.additem').click(function(){
+                      $(".form-add-item").slideDown();
+                  });
+
+                  $('.add').click(function(){
+          
+                    $(".form-add-item").hide("slow");
+                     
+                  });
+
+                  $('.delete').click(function(){
+          
+                  $(this).parent().remove();
+                  
+                  dolist.deleteRow($(this).parent().attr('id'));
+                     
+                  });
+
+                  $('.update').click(function(){
+          
+                   
+                     
+                  });
+
+                  $('.close-add').click(function(){
+                      $(".form-add-item").slideUp();
+                  });
+
+                  $("#form-add").submit(function(e){
+                  
+                  e.preventDefault();
+                  var formData= $("#form-add").serializeArray();
+                  var list={};
+                  for (var i = 0; i < formData.length; i++) {
+                    list[formData[i].name] = formData[i].value
+                  }
+                   var result=dolist.insertRow(list);
+
+                   if(list.complete == "true"){
+                    $( "#complete" ).append("<div ondragstart='dragstart(event)' draggable='true'  class='alert alert-success'   id='1'>\
+                        <p style='color:#505050;font-size:30px;'>"+list.title+"</p>\
+                        <p>"+list.desc+"</p>\
+                        <button class='delete btn btn-danger'>Delete</button>\
+                        <button class='update btn btn-success' >Update</button>\
+                        </div>"
+                      );
+                  }
+                  else if(list[i].complete == "false") {
+                    $( "#notcomplete" ).append("<div ondragstart='dragstart(event)' draggable='true' class='alert alert-warning' id='1'>\
+                        <p style='color:#505050;font-size:30px;'>"+list.title+"</p>\
+                        <p>"+list.desc+"</p>\
+                        <button class='delete btn btn-danger'>Delete</button>\
+                        <button class='update btn btn-warning' >Update</button>\
+                        </div>"
+                      );
+                  }
+                });
+             });
+
+             // console.log(user_id);         
+            //resolve({status:"sucess", data:res.rows ,message:"good data"});
 
             }
         }   
         else{
-
            reject("an error has been ");
           }
-                           });
-                      })
-                  
-          });
-
-
-
+        });
+        })           
+    });
     } ,
-
 }
 
 
-user.createTable();
-user.insertUser({"id":1,"username":"hager","password":"hager"});
+user.createTableUser();
+user.insertUser({"uid":1,"username":"hager","password":"hager"});
+dolist.createTable();
+/* var doo = {
+           "id":1 ,
+          "title": "test",
+          "desc": "test desc" ,
+          "complete" : "true"
+ }
+ var doo1 = {
+           "id":2 ,
+          "title": "test",
+          "desc": "test desc" ,
+          "complete" : "true"
+ }
+  var doo2 = {
+           "id":3 ,
+          "title": "test",
+          "desc": "test desc" ,
+          "complete" : "false"
+ }
+dolist.insertRow(doo);
+dolist.insertRow(doo1);
+dolist.insertRow(doo2);
+*/
+dolist.getAllList().then(function(res){
+  console.log(res);
+  dolist.rendureList(res.data);
+} , function(res){
+ // console.log(res.messege)
+});
+
+function dragstart(e) {
+  console.log(e.target.id);
+  e.dataTransfer.setData("eleid",e.target.id)
+  console.log("drag started!");
+}
+function dragover(e){
+  e.preventDefault();
+  console.log("dragged over!");
+}
+function drop(e){
+  var id = e.dataTransfer.getData("eleid");
+  e.target.appendChild(document.getElementById(id))
+  e.preventDefault();
+ if(e.target.id == "complete" ){
+    dolist.updateRow("true",id);
+ }
+ else if(e.target.id == "notcomplete"){
+    dolist.updateRow("false",id);
+ }
+   console.log("dropped!");
+}
 
 
-$("form").submit(function(e){
+
+$("#form").submit(function(e){
 
     e.preventDefault();
 
@@ -81,21 +296,8 @@ $("form").submit(function(e){
     }
 
    var result=user.getUser(list);
-//   console.log(result);
-//console.log(list.username);
-//console.log(list.password);
 
-
-//location.href="index2.html";
-
-
-
-
-    });
-
-
-
-
+    })
 
 
 
