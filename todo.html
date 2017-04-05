@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>todo app</title>
+
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/todol.css" />
+
+    </head>
+    <body>
+ <div class="container">
+          <div id="complete" ondragover="dragover(event)" ondrop="drop(event)"> <h1>Completed </h1></div>
+          <div id="notcomplete" ondragover="dragover(event)" ondrop="drop(event)"><h1> Not Completed </h1> </div>
+      </div>
+          <button class="add">ADD TO List</button>
+          <form style="display:none" id="form1">
+            <input type="text" placeholder="Name" name="name">
+            <input type="text" placeholder="Description" name="desc">
+            <input type="text" placeholder="Status" name="complete">
+            <button >SUBMIT</button>
+          </form>
+        
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/todo.js"></script>
+        
+    </body>
+</html>
