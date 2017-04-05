@@ -75,7 +75,7 @@ var dolist ={
                 });
             });
     },
-    'rendureList':function(doo){
+    'randerList':function(doo){
 
       for (var i = 0; i<doo.length ;i++)
       {
@@ -165,7 +165,7 @@ var user=
 
               dolist.getAllList(user_id).then(function(res){
                   console.log(res);
-                  dolist.rendureList(res.data);
+                  dolist.randerList(res.data);
                 } , function(res){
                  // console.log(res.messege)
                 });
@@ -326,29 +326,6 @@ user.insertUser({"uid":1,"username":"hager","password":"hager"});
 user.insertUser({"uid":2,"username":"dero","password":"dero"});
 dolist.createTable();
 
-/* var doo = {
-           "id":1 ,
-          "title": "test",
-          "desc": "test desc" ,
-          "complete" : "true"
- }
- var doo1 = {
-           "id":2 ,
-          "title": "test",
-          "desc": "test desc" ,
-          "complete" : "true"
- }
-  var doo2 = {
-           "id":3 ,
-          "title": "test",
-          "desc": "test desc" ,
-          "complete" : "false"
- }
-dolist.insertRow(doo);
-dolist.insertRow(doo1);
-dolist.insertRow(doo2);
-*/
-
 
 function dragstart(e) {
 
@@ -356,7 +333,7 @@ function dragstart(e) {
 
   e.dataTransfer.setData("eleid",e.target.id)
 
-// dolist.rendureList(res.data);
+;
 
   console.log("drag started!");
 }
@@ -364,7 +341,7 @@ function dragstart(e) {
 function dragover(e){
   e.preventDefault();
   console.log("dragged over!");
-  // dolist.rendureList(res.data);
+  
 }
 
 function drop(e){
@@ -381,7 +358,7 @@ function drop(e){
     dolist.updateRow("false",id);
  }
    //console.log("dropped!");
-    dolist.rendureList(res.data);
+    dolist.randerList(res.data);
 }
 
 
