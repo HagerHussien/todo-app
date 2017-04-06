@@ -105,7 +105,7 @@ body {
 .add-form{
   font-size: 15px;
   display: block;
-  width: 300px;
+  width: 600px;
   margin: 0 auto;
   background-color: #fff;
   padding: 20px;
@@ -145,9 +145,9 @@ input[type=radio]{
 .update-form{
   font-size: 15px;
   display: block;
-  width: 300px;
+  width: 600px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color:  #f0ad4e;
   padding: 20px;
   border-radius: 10px;
   box-sizing: border-box;
@@ -158,6 +158,7 @@ input[type=radio]{
   border:1px solid;
   border-radius: 10px;
   margin-bottom: 10px;
+  background-color:  #f0ad4e;
   width: 100%;
   box-sizing: border-box;
 }
@@ -168,4 +169,41 @@ input[type=radio]{
 input[type=radio]{
   display: inline;
   width: auto;
+}
+
+
+.details-form{
+  display: none;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  padding-top: 50px;
+
+}
+
+#details{
+  font-size: 15px;
+  display: block;
+  width: 600px;
+  margin: 0 auto;
+  background-color: #5bc0de;
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+#details input{
+  padding: 10px;
+  display: block;
+  border:1px solid;
+  border-radius: 10px;
+  margin-bottom: 10px;
+   background-color: #5bc0de;
+  width: 100%;
+  box-sizing: border-box;
+}
+#details button{
+  width: 100%;
 }

@@ -1,54 +1,39 @@
 <html>
     <head>
         <title>todo app</title>
-
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/todo.css" />
-
     </head>
     <body>
-
         <div class="top-border"></div>
-       
-
         <div class="container-fluid padding-top-bottom-sm">
-            
             <div class="row">
                 <div class="col-md-offset-2 title-sm ">Crossover Todo </div>
             </div>
-            
         </div> 
         <div class="container-fluid container-bg padding-top-bottom-lg">
-            
             <div class="row">
                 <div class="col-md-offset-2 title-lg ">Cross over todo app </div>
             </div>
              <div class="row">
                 <div class="col-md-offset-2 subtitle-sm ">This is an app to create, edit and organize your upcoming tasks!.</div>
             </div>
-            
-        </div> 
+          </div> 
          <div class="loginpage">
         <div class="container-fluid padding-top-bottom-sm">
             <div class="row">
              <div class="col-md-offset-4 col-md-5">
-                
-                <form class="form-horizontal" action="" id="form">
-                  
-                  <div class="form-group">
+              <form class="form-horizontal" action="" id="form">          
+                <div class="form-group">
                       <input type="name" required class="form-control" name="username" id="name" placeholder="Username">
                   </div>
-                  
                   <div class="form-group">
                       <input type="password" required class="form-control" name="password" id="password" placeholder="Password">
                   </div>
-                  
                   <div class="form-group">
                       <button type="submit" class="btn btn-primary col-md-12">Login</button>
                   </div>
-
                 </form>
-
               </div>
             </div>
         </div>
@@ -56,12 +41,9 @@
         <div class=" col-md-4 col-md-offset-4 alert alert-danger alert-dismissable">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
             <strong> <center>ERROR!</center></strong> <hr> Invalid USER !! </div>
-
        </div>
-        
         </div>
         <div class="pagetodo">
-
            <div class="container-fluid padding-top-bottom-sm">
             <div class="row">
              <div class="col-md-offset-2 col-md-4">
@@ -69,11 +51,8 @@
                 <div class="alert alert-warning">
                   <strong>Hurry up!</strong> You have to complete all these todo items.
                 </div>
-
               </div>
                   <button class="btn btn-primary additem"><span>+</span> Add Item </button>
-               
-             
             </div>
               <div class="col-md-4">
                 <div id="complete" ondragover="dragover(event)" ondrop="drop(event)">
@@ -84,14 +63,9 @@
              </div>
              </div>
              </div>
-
-
           <div  class="form-add-item" >
-
           <form class="form-horizontal add-form" id="form-add">
-
            <div class="salert-dismissable">
-           
             <strong>Add New todo item</strong>
              <a href="#" class="close-add" data-dismiss="alert" aria-label="close"> X </a>
             </div>
@@ -113,7 +87,6 @@
              </div>
           </form>
           </div>
-
              <div class="slidedown-delete" >   
                 <div class=" col-md-4 col-md-offset-4 alert alert-danger alert-dismissable">
                   <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
@@ -121,47 +94,47 @@
                   <hr>
                  <button  class="btn btn-primary yes"> yes</button>
                   </div>
-
                </div>
-
-
-            <div  class="form-update-item" >
-
-          <form class="form-horizontal update-form" id="form-update">
-
+        <div class="well well-lg details-form">
+         <div id="details">
            <div class="salert-dismissable">
-           
+            <strong>Details for todo  item</strong>
+            <label>TiTle:</label>
+            <input type="text"  readonly name="title">
+            <label>Description:</label>
+           <input type="text"  readonly name="desc">
+           <label>Added By :</label>
+           <input type="text" readonly name="username" class="add-by">
+            <hr>
+            <button  class="btn btn-primary  details-close">close</button>
+            </div>
+          </div>
+        </div>
+            <div  class="form-update-item" >
+          <form class="form-horizontal update-form" id="form-update">
+           <div class="salert-dismissable">
             <strong>Update todo item</strong>
              <a href="#" class="close-update" data-dismiss="alert" aria-label="close"> X </a>
             </div>
             <hr>
            <div class="form-group">
+              <label>TiTle:</label>
             <input type="text" placeholder="Title" readonly name="title">
           </div>
            <div class="form-group">
+            <label>Description:</label>
             <input type="text" placeholder="Description" name="desc">
             </div>
-             
             <hr>
              <div class="form-group">
             <button  class="btn btn-primary update-submit submit">Update</button>
              </div>
           </form>
           </div>
-
-
        </div>
-
-
-
         <div class="bottom-border"></div>
-            
-           
-
-        
 	  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/todo.js"></script>
-        
     </body>
 </html>
